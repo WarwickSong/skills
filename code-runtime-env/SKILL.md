@@ -43,11 +43,7 @@ Inspect the target project from the command working directory upward to the proj
    - `Pipfile` and `Pipfile.lock`
    - `requirements.txt` or requirement variants
 3. Conda environments
-   - `environment.yml`
-   - `environment.yaml`
-   - `conda-lock.yml`
-   - active shell prompt or environment variables indicating conda
-   - available conda environments when conda is installed
+   - try active conda first, then `conda run -n <env> ...` or `conda env list` to list available environments
 4. Language-specific local tooling
    - `node_modules/`, `package.json`, lock files, and package manager fields
    - `.nvmrc`, `.node-version`, `.tool-versions`
