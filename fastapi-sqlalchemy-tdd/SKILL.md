@@ -5,49 +5,43 @@ description: "Guides FastAPI and SQLAlchemy changes with contract-aware pytest c
 
 # FastAPI SQLAlchemy TDD
 
-This skill guides backend development for Zhihua's FastAPI projects, especially JobVideo and NF-SafetyHub.
+This skill guides Python backend development in projects that use FastAPI, SQLAlchemy, Pydantic, pytest, or adjacent patterns. It is based on `zhihua-dev-profile`, not a single repository.
 
-Use it for route changes, schemas, ORM models, database migrations, auth flows, state machines, relay behavior, APIKey governance, storage, archive/audit logic, and backend bug fixes.
+Use it for route changes, schemas, ORM models, database migrations, auth flows, state machines, API contracts, relay/proxy behavior, governance logic, storage, archive/audit logic, and backend bug fixes.
 
-## Principles
+## Inferred Backend Tendencies
 
-- Contract first: understand the API, data model, state machine, and acceptance criteria before coding.
-- Tests protect behavior: add or update focused pytest coverage for meaningful backend behavior changes.
-- Small vertical slices: prefer one endpoint or behavior path at a time.
-- Reuse existing test utilities and fixtures before adding new ones.
-- Keep FastAPI dependency injection, Pydantic schemas, SQLAlchemy models, and service logic separated according to existing project patterns.
+- API behavior should be contract-aware.
+- Data model and state transitions should be explicit.
+- Tests should protect meaningful behavior, especially regressions and failure paths.
+- Existing module structure should be reused before new abstractions are introduced.
+- Production implications matter for backend infrastructure.
 
-## JobVideo Backend Workflow
+## Generic Backend Workflow
 
-When changing `Private/JobVideo_Platform/jobvideo_backend`:
+When changing a FastAPI/SQLAlchemy backend:
 
-1. Read the relevant project docs:
-   - `产品研发控制/00-研发控制入口.md`
-   - `03-功能定义/` for business rules
-   - `06-接口契约/` for API shape
-   - `07-数据模型/` for table fields and constraints
-   - `08-验收与测试/` for expected coverage
-2. Inspect adjacent modules under `app/<feature>/`.
-3. Reuse the existing module pattern: `models.py`, `schemas.py`, `routes.py`, optional `services.py`.
-4. Update or add tests in `jobvideo_backend/tests/`.
-5. For database changes, prefer explicit migration/compatibility handling consistent with existing scripts.
+1. Read repository instructions and overview docs.
+2. Identify authoritative API, data model, feature, or acceptance docs if present.
+3. Inspect adjacent modules before designing a new shape.
+4. Reuse the existing project pattern for routes, schemas, models, services, dependencies, middleware, and tests.
+5. Apply `mature-package-first-dev` before adding dependencies or infrastructure helpers.
+6. Add or update focused pytest coverage for behavior changes.
+7. Use `code-runtime-env` before running pytest, migrations, local services, or installing backend dependencies.
+8. Run the smallest relevant validation first.
+9. Use `project-doc-sync` if contracts, data models, behavior, or deployment changed.
 
-## SafetyHub Backend Workflow
+## Common Patterns to Detect
 
-When changing `Public/NF-SafetyHub`:
+Look for the project's existing equivalents of:
 
-1. Read `README.md` and `产品研发控制/SafetyHub当前开发进展和下一步规划.md`.
-2. Identify the affected subsystem:
-   - `proxy/` for transparent relay and streaming
-   - `engine/` for scanning rules
-   - `governance/` for APIKey and providers
-   - `middleware/` for request identity, limits, and concurrency
-   - `runtime/` for shared clients, queues, and caches
-   - `storage/` for persistence
-   - `admin/` for admin APIs and static UI
-3. Preserve documented invariants, especially transparent relay behavior and production safety boundaries.
-4. Add or update focused tests under `tests/`.
-5. Prefer `make test` or targeted `pytest tests/test_x.py` validation.
+- `models.py`, `schemas.py`, `routes.py`, `services.py`
+- FastAPI dependency injection and auth dependencies
+- SQLAlchemy session management and migration scripts
+- Pydantic request/response schema conventions
+- Test fixtures, API clients, and test utility modules
+- Middleware and runtime infrastructure
+- Archive/audit/logging conventions
 
 ## Test Strategy
 
@@ -67,6 +61,16 @@ Use red-green-refactor when feasible:
 4. Confirm the test passes.
 5. Run adjacent tests if the change touches shared code.
 
+## Production-Sensitive Backend Work
+
+For relay/proxy, APIKey, concurrency, archive/audit, Docker, PostgreSQL, high-load, or deployment-sensitive changes:
+
+- Identify production invariants before coding.
+- Prefer focused regression tests.
+- Consider connection pools, queue limits, backpressure, timeouts, secret handling, and deployment packaging.
+- If the project involves production-sensitive backend or AI-infrastructure behavior, consider `production-backend-verification`.
+- If Docker/deployment artifacts must be created or changed, involve `docker-oneclick-packager` after behavior-level verification.
+
 ## Backend Change Checklist
 
 - Existing route/service/model pattern checked
@@ -83,4 +87,4 @@ Use red-green-refactor when feasible:
 - Adding a new framework or large dependency without a mature-package decision note
 - Mixing persistence, request parsing, and business rules in one route when adjacent code separates them
 - Changing public API behavior without updating contracts and tests
-- Weakening SafetyHub production safeguards for local convenience
+- Weakening production safeguards for local convenience

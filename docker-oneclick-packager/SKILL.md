@@ -7,6 +7,8 @@ description: "Packages projects for Docker one-click and offline intranet deploy
 
 This skill guides an Agent to transform a specified software project into a Docker-based one-click deployment package. The default target is an intranet/offline deployment bundle that can also support online deployment when Docker Hub or a registry is available.
 
+This skill is part of Zhihua's profile-driven development system. Use `zhihua-dev-profile` for long-term deployment preferences and `production-backend-verification` for production-sensitive backend validation; this skill owns packaging artifacts and operator-facing deployment bundles.
+
 ## When To Invoke
 
 Invoke this skill when the user asks to:
@@ -20,6 +22,8 @@ Invoke this skill when the user asks to:
 - Standardize deployment artifacts for Agent-assisted delivery
 
 Do not invoke this skill for small Dockerfile edits unless the user explicitly wants reusable packaging or deployment automation.
+
+For production-sensitive services, pair this skill with `production-backend-verification` before finalizing deployment artifacts.
 
 ## Core Goal
 

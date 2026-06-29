@@ -1,102 +1,118 @@
 ---
 name: "zhihua-dev-gatekeeper"
-description: "Routes Zhihua's coding work through project docs, mature-package checks, tests, and delivery rules. Invoke before non-trivial code changes."
+description: "Routes Zhihua's coding work through inferred domain profile, mature-package checks, tests, and delivery rules. Invoke before non-trivial code changes."
 ---
 
 # Zhihua Dev Gatekeeper
 
-This is the default entry skill for non-trivial development work in Zhihua's projects under `C:\Coding`, especially `Private/JobVideo_Platform` and `Public/NF-SafetyHub`.
+This is the default entry skill for non-trivial development work. It is not tied to a single repository. It uses the current codebase plus `zhihua-dev-profile` to choose the right workflow.
 
 Use this skill before implementing features, fixing bugs, changing architecture, adding dependencies, modifying deployment behavior, or updating production-facing workflows.
 
-## Core Principle
+## Development Profile Source
 
-Do not jump straight into code. First understand the project intent, current phase, existing patterns, available dependencies, tests, and delivery constraints.
+Use `zhihua-dev-profile` as the authoritative source for inferred domains, preferences, evidence, and monotonic profile updates.
 
-Prefer:
+Do not duplicate the full profile here. Mention only the relevant domains and preferences for the current task.
 
-1. Existing project code and utilities
-2. Existing dependencies already present in the project
-3. Mature external packages with clear justification
-4. Small custom code only when the above options are unsuitable
+## Repository Discovery
 
-## Project Routing
+For any project, first infer its local conventions:
 
-### JobVideo Platform
+1. Look for project-level instructions such as `AGENTS.md`, `README.md`, `.trae/`, `.agents/`, `CLAUDE.md`, or equivalent docs.
+2. Identify stack and commands from dependency/config files such as `requirements.txt`, `pyproject.toml`, `package.json`, `Dockerfile`, `docker-compose.yml`, `Makefile`, CI files, and test config.
+3. Identify product/control documentation if present, such as PRDs, specs, architecture docs, API contracts, data-model docs, deployment manuals, acceptance tests, or task boards.
+4. Search existing code for similar implementation patterns before designing new abstractions.
+5. Decide whether the task should use a companion skill.
 
-When working in `Private/JobVideo_Platform`:
+## Task Weight Routing
 
-1. Read `README.md` for product and stack overview.
-2. Read `产品研发控制/00-研发控制入口.md` before planning meaningful changes.
-3. For feature work, read the relevant files under:
-   - `03-功能定义/`
-   - `05-前端规划/`
-   - `06-接口契约/`
-   - `07-数据模型/`
-   - `08-验收与测试/`
-   - `10-Agent协作控制/`
-4. Respect the existing FastAPI + SQLAlchemy + Vue 3 + Vite architecture.
-5. For backend behavior changes, prefer adding or updating pytest coverage in `jobvideo_backend/tests/`.
-6. For frontend changes, verify the affected Vue view/component and the Vite build path.
+Do not force every request through the full workflow.
 
-### NF-SafetyHub
+### Quick Path
 
-When working in `Public/NF-SafetyHub`:
+Use a lightweight path for:
 
-1. Read `README.md` for architecture, commands, and deployment model.
-2. Read `产品研发控制/SafetyHub当前开发进展和下一步规划.md` before changing scope, production behavior, concurrency, relay, APIKey governance, Docker, or deployment.
-3. Treat the current automated test baseline as a production safety asset.
-4. For relay, streaming, header policy, APIKey, archive/audit, concurrency, and production config changes, add or update focused pytest coverage.
-5. Do not expand paused phases unless the user explicitly asks.
-6. Preserve transparent proxy invariants and production deployment constraints.
+- Pure explanations or Q&A
+- Tiny single-file edits
+- Copy changes, wording changes, or non-behavioral docs cleanup
+- Small style tweaks with no dependency, API, data, or deployment impact
+
+Quick path still requires respecting local file conventions, but it does not require mature-package analysis, broad doc reading, or full validation.
+
+### Standard Path
+
+Use the standard workflow for behavior changes, feature work, bug fixes, tests, API/data changes, dependency changes, and user-facing UI changes.
+
+### Strict Path
+
+Use the strict path for production-sensitive backend, security, auth, APIKey, data migration, deployment, Docker, offline/intranet delivery, high-concurrency, or LLM/AI infrastructure changes. Strict path requires explicit validation and documentation consideration.
 
 ## Mandatory Workflow
 
 For non-trivial changes:
 
-1. Identify the target project and affected layer.
-2. Load the relevant project control documents.
-3. Search existing code for similar implementation patterns.
-4. Invoke the mature-package-first mindset before writing new abstractions.
-5. Decide whether the task needs one of the companion skills:
-   - `mature-package-first-dev`
-   - `fastapi-sqlalchemy-tdd`
-   - `vue-vite-product-ui-review`
-   - `safetyhub-production-verification`
-   - `project-doc-sync`
+1. Identify the target project, affected layer, and relevant inferred domain(s).
+2. Load repository instructions and authoritative docs when present.
+3. Search existing code for similar patterns.
+4. Apply `mature-package-first-dev` before creating new technical capability or adding dependencies.
+5. Choose the most specific companion skill available.
 6. Make the smallest coherent change.
 7. Run the most specific reasonable validation first.
-8. Update documentation when behavior, APIs, data models, deployment, or project status changes.
+8. Use `project-doc-sync` when behavior, APIs, data models, deployment, or status changes.
 
 ## Companion Skill Selection
 
 Use `mature-package-first-dev` when:
 
-- A new helper, abstraction, parser, queue, client, scheduler, validator, retry layer, UI utility, or deployment script is being considered.
+- A helper, abstraction, parser, queue, client, scheduler, validator, retry layer, UI utility, or deployment script is being considered.
 - A new dependency might be introduced.
-- The implementation feels like something a mature package or existing project code may already solve.
+- The implementation feels like something an existing project pattern or mature package may already solve.
+
+Use `agent-dev-control` when:
+
+- Starting a new software project, organizing an existing project for repeated Agent-assisted development, or creating lightweight project-control docs.
+- Requirements, API contracts, data models, acceptance criteria, or task status are drifting across sessions.
+
+Use `code-runtime-env` when:
+
+- Running code, tests, scripts, builds, migrations, local services, package managers, or dependency installation commands.
+- The correct Python, Node, Conda, container, or project-local runtime is unclear.
 
 Use `fastapi-sqlalchemy-tdd` when:
 
-- Changing FastAPI routes, schemas, ORM models, database access, auth, state machines, APIKey logic, relay logic, or backend tests.
+- Working on Python backend services using FastAPI, SQLAlchemy, Pydantic, pytest, auth, state machines, API contracts, or database-backed behavior.
 
 Use `vue-vite-product-ui-review` when:
 
-- Changing JobVideo Vue pages, navigation, forms, upload flows, profile/company pages, video feed/detail pages, or user-facing UI states.
+- Working on Vue 3 / Vite product UI, forms, navigation, upload/media flows, dashboards, role-based pages, or user-facing states.
 
-Use `safetyhub-production-verification` when:
+Use `production-backend-verification` when:
 
-- Changing SafetyHub concurrency, Docker, PostgreSQL, upstream relay, streaming, archive queues, APIKey providers, production config, or offline deployment.
+- The task has production-sensitive traits: LLM/API proxying, transparent relay, streaming, APIKey governance, concurrency gates, archive queues, Docker, PostgreSQL, offline/intranet deployment, or high-concurrency verification.
+
+Use `docker-oneclick-packager` when:
+
+- The user asks to containerize, deploy, create Docker/Compose artifacts, make one-click deployment scripts, or build offline/intranet deployment bundles.
+- Deployment packaging needs reusable operator-facing docs, env templates, port/data-dir configurability, or multi-service coexistence.
 
 Use `project-doc-sync` when:
 
-- Code changes affect product behavior, API contracts, data models, deployment steps, acceptance criteria, or current project status.
+- Code changes affect product behavior, API contracts, data models, deployment steps, acceptance criteria, project status, or operating procedures.
+
+Use `zhihua-skill-evolution` when:
+
+- Real work reveals the inferred profile is incomplete, a domain should be added, a workflow misfires, or a rule should be tuned.
+
+## Current-Project Evidence
+
+Current-project evidence is maintained in `zhihua-dev-profile`. When future projects show new domains, use `zhihua-skill-evolution` to update that profile instead of editing routing rules ad hoc.
 
 ## Output Expectations
 
 When planning or reporting development work, include:
 
-- Target project and affected layer
+- Target project and inferred domain(s)
 - Existing pattern or dependency reused
 - Whether a new package was considered or rejected
 - Test or validation path

@@ -7,6 +7,8 @@ description: "Selects safe project runtime environments before running code. Inv
 
 This skill guides an Agent to safely choose the correct runtime environment before running code, tests, scripts, package managers, or dependency installation commands.
 
+This skill is part of Zhihua's profile-driven development system. `zhihua-dev-gatekeeper` routes here whenever execution or dependency changes are needed; this skill owns runtime selection and command-environment safety.
+
 ## When To Invoke
 
 Invoke this skill when the Agent is about to:
@@ -19,6 +21,8 @@ Invoke this skill when the Agent is about to:
 - Start a project command where the correct environment is unclear
 
 Do not invoke this skill for read-only source inspection, static code review, or documentation-only edits unless command execution is required.
+
+When paired with `mature-package-first-dev`, decide what should be installed there first, then use this skill to choose where and how to install or run it safely.
 
 ## Core Rule
 

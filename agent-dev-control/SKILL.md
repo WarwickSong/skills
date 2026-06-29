@@ -7,6 +7,8 @@ description: "Creates reusable Agent-friendly project R&D control docs. Invoke w
 
 This skill helps an Agent set up a lightweight, reusable project R&D control system for software projects. Use it to turn vague product or engineering direction into a maintainable set of documents that guides future Agent-assisted development.
 
+This skill is part of Zhihua's profile-driven development system. Use `zhihua-dev-profile` for long-term preferences and `zhihua-dev-gatekeeper` for routing; this skill owns the project-control documentation setup itself.
+
 ## When To Invoke
 
 Invoke this skill when the user wants to:
@@ -19,6 +21,10 @@ Invoke this skill when the user wants to:
 - Establish lightweight governance before implementing features
 
 Do not invoke this skill for small one-off code edits, typo fixes, or isolated debugging tasks unless the user explicitly asks to improve project governance.
+
+If project-control docs already exist, prefer `project-doc-sync` for behavior/API/data/deployment documentation updates instead of recreating the control structure.
+
+If creating project-control docs reveals a new recurring development domain or preference, use `zhihua-skill-evolution` to update `zhihua-dev-profile` rather than embedding that profile only in the project docs.
 
 ## Core Idea
 
