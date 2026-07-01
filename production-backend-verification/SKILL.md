@@ -5,9 +5,17 @@ description: "Verifies production-sensitive backend and AI-infra changes. Invoke
 
 # Production Backend Verification
 
+## 中文速览
+
+- 用途：保护生产敏感后端和 AI infra 改动，先明确不变量，再做验证。
+- 适用：relay/proxy、streaming、APIKey、并发、队列、PostgreSQL、Docker、Nginx、负载和生产配置。
+- 不适用：普通后端业务实现、纯视觉前端改动、只生成 Docker 交付产物但不涉及生产风险判断的场景。
+
 This skill protects production-sensitive backend and AI-infrastructure work.
 
 Use it when changing production-sensitive areas such as transparent relay, streaming, header policy, APIKey governance, credential-provider integrations, concurrency limits, request limits, archive queues, shared upstream clients, PostgreSQL, Docker, Nginx, offline/intranet deployment, production config, load testing, and operational docs.
+
+This skill owns production invariants and verification. Use `fastapi-sqlalchemy-tdd` for FastAPI implementation and contract tests, `docker-oneclick-packager` for packaging artifacts, `mature-package-first-dev` for dependency decisions, `code-runtime-env` for command execution, and `project-doc-sync` for runbook or deployment documentation updates.
 
 ## Profile Context
 
@@ -94,15 +102,9 @@ For production-readiness work, validate or document:
 - Offline or intranet deployment package rebuild requirements
 - Production secret and logging safety
 
-## Mature Package Rule
+## Dependency Boundary
 
-Before adding packages to production-sensitive paths:
-
-1. Check if current dependencies already cover the need.
-2. Evaluate Docker and offline/intranet deployment impact.
-3. Avoid heavy dependencies for small runtime behavior.
-4. Prefer mature security/crypto libraries over custom security-sensitive code when dependency cost is acceptable.
-5. Use `mature-package-first-dev` for the dependency decision and `code-runtime-env` for safe installation or execution.
+Use `mature-package-first-dev` for production-sensitive package decisions and `code-runtime-env` for safe installation or execution. This skill adds stricter production criteria: Docker and offline/intranet impact, runtime footprint, security-sensitive library maturity, and whether the dependency affects reliability or operability.
 
 ## Packaging and Documentation Handoff
 

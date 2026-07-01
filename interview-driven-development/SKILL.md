@@ -5,6 +5,12 @@ description: "Uses interviewer-style questioning to improve development quality.
 
 # Interview-Driven Development
 
+## 中文速览
+
+- 用途：用“面试官追问”的方式提升复杂开发任务的方案质量、可解释性和可验证性。
+- 适用：复杂项目、架构取舍、AI/数据系统、作品集、面试讲解、需要深入权衡的开发任务。
+- 不适用：拼写修正、一行小改、机械性文件调整、没有明显设计选择的简单任务。
+
 This skill helps an agent develop software, data workflows, AI systems, prototypes, or technical artifacts through an interviewer-style reasoning loop. The agent acts as both builder and critical interviewer: it asks high-quality questions, researches better methods when needed, compares trade-offs, verifies implementation quality, and explains the key reasoning to the user in a useful but concise way.
 
 The goal is not to expose every internal thought. The goal is to improve the project and help the user learn how to explain the project.

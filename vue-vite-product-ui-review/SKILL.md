@@ -5,9 +5,17 @@ description: "Reviews and improves Vue 3 + Vite product UI. Invoke for frontend 
 
 # Vue Vite Product UI Review
 
+## 中文速览
+
+- 用途：审查和改进 Vue 3 + Vite 产品界面的用户流程、状态表达和可用性。
+- 适用：页面、组件、路由、表单、上传、仪表盘、角色流程、API 状态和前端交互改动。
+- 不适用：纯 Element Plus 视觉润色、纯后端逻辑、或不影响用户体验的内部重构。
+
 This skill guides Vue 3 + Vite frontend product work. It is based on `zhihua-dev-profile`, especially practical product UI, role-aware workflows, media/upload flows, and API-backed states.
 
 Use it when changing Vue pages, components, routing, API calls, forms, upload flows, feed/detail views, dashboards, profile/company-like pages, role-based flows, or user-facing states.
+
+This skill owns product usability, states, flows, contracts, and maintainability. For purely visual modernization of Vue 3 + Element Plus screens, use `element-plus-ui-polish`; when a change affects both behavior and aesthetics, this skill owns behavior and `element-plus-ui-polish` owns visual polish.
 
 ## Inferred Frontend Tendencies
 
@@ -43,14 +51,9 @@ Evaluate UI changes across these dimensions:
 - API robustness: frontend handles backend error responses without silent failure
 - Consistency: styles and structure match existing views/components
 
-## Mature Package Rule
+## Dependency Boundary
 
-Before adding a frontend dependency:
-
-1. Check whether Vue/Vite/browser APIs already solve it.
-2. Check whether existing components, CSS, composables, or API utilities can be extended.
-3. Only add a package if it clearly improves UX or reduces substantial complexity.
-4. Consider bundle size, maintenance, license, and whether the dependency is overkill.
+Use `mature-package-first-dev` before adding frontend dependencies. This skill should only add frontend-specific considerations: Vue/Vite/browser-native capability, existing components/composables/API utilities, bundle size, maintenance, license, and whether the dependency is overkill for the UX gain.
 
 ## Implementation Guidance
 

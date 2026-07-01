@@ -5,9 +5,17 @@ description: "Checks existing code, current dependencies, and mature packages be
 
 # Mature Package First Development
 
+## 中文速览
+
+- 用途：在写新能力或加依赖前，先检查已有代码、已有依赖、框架能力和成熟包，避免重复造轮子。
+- 适用：新增工具函数、抽象层、解析器、客户端、部署脚本、依赖包或基础设施能力前。
+- 不适用：明确的小改动、纯文案修改、已经确定复用现有实现且不新增技术能力的场景。
+
 This skill prevents unnecessary custom code and repeated wheel-building during development. It is domain-profile aware, not project-specific. Use `zhihua-dev-profile` as the profile source.
 
 Use it before implementing a new technical capability, adding a helper module, designing infrastructure, creating deployment scripts, writing parsers/validators/clients, or introducing a new dependency.
+
+This skill owns package and reuse decisions only. Use domain skills for implementation details, `code-runtime-env` for installation or command execution, and `project-doc-sync` when dependency or behavior changes affect authoritative docs.
 
 ## Decision Order
 
@@ -20,18 +28,9 @@ Always evaluate options in this order:
 
 Custom implementation is acceptable only when it is simpler, safer, more maintainable, or avoids unacceptable deployment/security costs.
 
-## Profile-Aware Domains
+## Profile-Aware Scope
 
-Zhihua's inferred domains in `zhihua-dev-profile` mean package checks should be especially careful for:
-
-- Python web services, FastAPI, Pydantic, SQLAlchemy, pytest, httpx, async I/O
-- API contracts, auth, permissions, state transitions, audit/archive behavior
-- Vue/Vite frontend UI, routing, forms, upload/media flows, browser APIs
-- LLM/AI infrastructure, proxying, streaming, APIKey governance, observability
-- Docker, Nginx, PostgreSQL, offline/intranet delivery, production verification
-- Project-control documents, acceptance criteria, deployment manuals, and agent workflows
-
-This domain list is summarized from `zhihua-dev-profile`. If future work reveals new recurring domains, update `zhihua-dev-profile` through `zhihua-skill-evolution`; do not maintain a separate divergent list here.
+Use `zhihua-dev-profile` to identify relevant domains without maintaining a separate domain list here. Be especially strict when package choices affect production-sensitive backend paths, deployment/offline delivery, auth/security, persistent data, or user-facing frontend bundle size.
 
 ## Required Checks
 
@@ -73,6 +72,8 @@ Production-sensitive backend infrastructure requires a stricter bar than product
 If the decision is to install, update, or remove a dependency, hand off to `code-runtime-env` before running package-manager commands.
 
 If the dependency affects Docker images, offline/intranet bundles, or deployment artifacts, also involve `docker-oneclick-packager` or `production-backend-verification` as appropriate.
+
+If the decision changes project setup, runtime assumptions, API behavior, or deployment instructions, involve `project-doc-sync` after implementation.
 
 ## Decision Template
 

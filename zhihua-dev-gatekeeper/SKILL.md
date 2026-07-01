@@ -5,6 +5,12 @@ description: "Routes Zhihua's coding work through inferred domain profile, matur
 
 # Zhihua Dev Gatekeeper
 
+## 中文速览
+
+- 用途：非平凡代码任务的默认入口，先判断任务轻重，再选择合适的 companion skill。
+- 适用：功能开发、bug 修复、架构调整、依赖变化、部署变化、生产相关改动前。
+- 不适用：纯问答、极小文案修改、或已经明确只需要某个更具体 Skill 的简单任务。
+
 This is the default entry skill for non-trivial development work. It is not tied to a single repository. It uses the current codebase plus `zhihua-dev-profile` to choose the right workflow.
 
 Use this skill before implementing features, fixing bugs, changing architecture, adding dependencies, modifying deployment behavior, or updating production-facing workflows.
@@ -14,6 +20,24 @@ Use this skill before implementing features, fixing bugs, changing architecture,
 Use `zhihua-dev-profile` as the authoritative source for inferred domains, preferences, evidence, and monotonic profile updates.
 
 Do not duplicate the full profile here. Mention only the relevant domains and preferences for the current task.
+
+## Routing Ownership
+
+This skill owns task-weight classification and companion-skill selection. It should not duplicate detailed checklists owned by focused skills.
+
+| Concern | Owner Skill | Gatekeeper Responsibility |
+|---------|-------------|---------------------------|
+| Profile and long-term preferences | `zhihua-dev-profile` | Read only the relevant profile signals |
+| Skill maintenance and rule tuning | `zhihua-skill-evolution` | Route feedback or misfires there |
+| Dependency and package decisions | `mature-package-first-dev` | Invoke before new capabilities or packages |
+| Runtime and command safety | `code-runtime-env` | Invoke before execution or installation |
+| FastAPI, SQLAlchemy, API, DB, auth | `fastapi-sqlalchemy-tdd` | Route backend behavior work there |
+| Vue/Vite product UI and user flows | `vue-vite-product-ui-review` | Route frontend product behavior there |
+| Element Plus visual polish | `element-plus-ui-polish` | Use only for visual modernization of Element Plus UI |
+| Production-sensitive backend and AI infra | `production-backend-verification` | Escalate strict-path production risks there |
+| Docker packaging and offline delivery | `docker-oneclick-packager` | Route packaging artifacts there |
+| Existing project docs after changes | `project-doc-sync` | Invoke when behavior, API, data, deployment, or status changes |
+| New project-control docs | `agent-dev-control` | Route new governance setup there |
 
 ## Repository Discovery
 
@@ -63,6 +87,8 @@ For non-trivial changes:
 
 ## Companion Skill Selection
 
+Prefer the most specific owner. When multiple skills apply, use this order: route with this skill, decide packages with `mature-package-first-dev` if needed, execute commands through `code-runtime-env`, implement through the domain skill, then sync docs through `project-doc-sync` when required.
+
 Use `mature-package-first-dev` when:
 
 - A helper, abstraction, parser, queue, client, scheduler, validator, retry layer, UI utility, or deployment script is being considered.
@@ -86,6 +112,11 @@ Use `fastapi-sqlalchemy-tdd` when:
 Use `vue-vite-product-ui-review` when:
 
 - Working on Vue 3 / Vite product UI, forms, navigation, upload/media flows, dashboards, role-based pages, or user-facing states.
+
+Use `element-plus-ui-polish` when:
+
+- The project uses Vue 3 + Element Plus and the request is primarily visual polish, modernization, reducing template feel, spacing, hierarchy, or component styling.
+- If the request also changes flows, forms, API states, permissions, or navigation behavior, pair it with `vue-vite-product-ui-review`; product correctness owns behavior, polish owns aesthetics.
 
 Use `production-backend-verification` when:
 
@@ -117,5 +148,8 @@ When planning or reporting development work, include:
 - Whether a new package was considered or rejected
 - Test or validation path
 - Documentation updates, if needed
+- Risk or follow-up items, if any
+
+Use the user's latest language for user-facing reports. Keep skill names and code identifiers unchanged.
 
 Keep reports concise and operational.

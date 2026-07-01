@@ -5,6 +5,12 @@ description: "Defines Zhihua's inferred development domains and preferences. Inv
 
 # Zhihua Development Profile
 
+## 中文速览
+
+- 用途：记录志华长期开发领域、偏好和证据，是其他自定义 Skill 的用户画像来源。
+- 适用：判断任务属于哪个开发领域、是否要新增领域、或调整其他 Skill 规则时。
+- 不适用：具体实现某个功能、运行测试、打包部署或同步项目文档的执行场景。
+
 This skill is the authoritative profile source for Zhihua's (志华) custom development Skill system.
 
 Use it when routing coding work, deciding which companion Skill applies, evaluating whether a new domain should be added, or updating other custom Skills from real-use feedback.
@@ -54,6 +60,7 @@ The inferred domain set is monotonic:
 - Prefer project-local or managed runtimes over global runtimes for execution and dependency installation.
 - Prefer deployment packages that are configurable, reproducible, and safe for multiple services on one server.
 - Prefer clear handoffs between Skills: routing, package choice, runtime execution, tests, documentation, and deployment should each be owned by the most specific relevant Skill.
+- Prefer Chinese for user-facing explanations, Chinese project-control documents, and natural trigger phrases when the user works in Chinese; keep Skill names, technical identifiers, and routing descriptions stable in English.
 
 ## Current Evidence Log
 
@@ -61,6 +68,7 @@ Evidence should be used to infer domains and preferences, not to hard-code proje
 
 - A short-video recruiting product suggests product UI, role-based workflows, media handling, FastAPI, SQLAlchemy, Vue/Vite, and API-contract discipline.
 - An LLM safety/proxy service suggests production-sensitive backend infrastructure, relay compatibility, APIKey governance, audit/archive, concurrency control, Docker/PostgreSQL, offline deployment, and verification discipline.
+- Current Skill maintenance feedback suggests a preference for clearer skill ownership, less duplicated checklists, explicit routing priority, and selective Chinese content for natural interaction.
 
 ## Profile Update Protocol
 

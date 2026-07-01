@@ -5,6 +5,12 @@ description: "Selects safe project runtime environments before running code. Inv
 
 # Code Runtime Environment
 
+## 中文速览
+
+- 用途：在运行代码、测试、构建、脚本或安装依赖前，选择安全的项目运行环境。
+- 适用：执行 Python/Node/Conda/Docker/package manager 命令前，尤其是不确定该用哪个环境时。
+- 不适用：只读代码、静态分析、纯文档修改且不需要执行命令的场景。
+
 This skill guides an Agent to safely choose the correct runtime environment before running code, tests, scripts, package managers, or dependency installation commands.
 
 This skill is part of Zhihua's profile-driven development system. `zhihua-dev-gatekeeper` routes here whenever execution or dependency changes are needed; this skill owns runtime selection and command-environment safety.

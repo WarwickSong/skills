@@ -5,6 +5,12 @@ description: "Guides FastAPI and SQLAlchemy changes with contract-aware pytest c
 
 # FastAPI SQLAlchemy TDD
 
+## 中文速览
+
+- 用途：指导 FastAPI / SQLAlchemy 后端改动，用契约意识和 pytest 覆盖保护行为。
+- 适用：接口、schema、ORM、数据库、鉴权、状态流转、API 契约、后端 bug 修复。
+- 不适用：纯前端 UI、纯 Docker 交付包、或不涉及后端行为的文档小改。
+
 This skill guides Python backend development in projects that use FastAPI, SQLAlchemy, Pydantic, pytest, or adjacent patterns. It is based on `zhihua-dev-profile`, not a single repository.
 
 Use it for route changes, schemas, ORM models, database migrations, auth flows, state machines, API contracts, relay/proxy behavior, governance logic, storage, archive/audit logic, and backend bug fixes.

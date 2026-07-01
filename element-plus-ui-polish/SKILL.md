@@ -5,13 +5,22 @@ description: "Polishes Vue 3 + Element Plus UI to modern professional aesthetic.
 
 # Element Plus UI Polish
 
+## 中文速览
+
+- 用途：把 Vue 3 + Element Plus 的默认模板感界面打磨得更现代、专业、清爽。
+- 适用：用户说界面丑、土、模板感强，或要求更专业、更现代的视觉效果时。
+- 不适用：主要改产品流程、表单逻辑、权限、API 状态或路由行为的场景。
+
 This skill upgrades a default-themed Vue 3 + Element Plus application from "template-looking" to a modern, professional dashboard aesthetic. It applies principles gathered from dashboard design best practices and Element Plus theming guides.
+
+This skill owns visual polish only: spacing, hierarchy, colors, typography, Element Plus component styling, and visual consistency. It does not replace `vue-vite-product-ui-review` for product flows, forms, permissions, API error states, navigation behavior, or accessibility review beyond visual basics.
 
 ## When to Invoke
 
 - User says the UI looks "ugly", "basic", "template-like", or "土"
 - User asks to make the UI more "professional", "modern", or "polished"
 - User asks for UI/UX improvements on an Element Plus project
+- Pair with `vue-vite-product-ui-review` when the request changes user flows, data states, validation, permissions, routing, or API-backed behavior
 
 ## Core Design Principles
 

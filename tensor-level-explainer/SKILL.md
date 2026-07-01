@@ -5,6 +5,12 @@ description: "Explains AI/ML concepts at tensor level. Invoke when user asks how
 
 # Tensor-Level Explainer
 
+## 中文速览
+
+- 用途：用 tensor shape、公式、输入输出和工程直觉解释 AI/ML 模型机制。
+- 适用：解释 VAE、CFG、diffusion、attention、LoRA、ControlNet、DiT、flow matching 等概念。
+- 不适用：普通代码修改、项目部署、前后端开发，或只需要高层科普不需要张量细节的场景。
+
 Use this skill when the user wants an AI/ML concept explained in a concrete, engineering-style way: tensor shapes, model inputs/outputs, formulas, and step-by-step intuition.
 
 This skill is especially useful for concepts such as VAE, CFG, diffusion denoising, latent space, attention, conditional velocity fields, flow matching, rectified flow, LoRA, ControlNet, U-Net, DiT, and sampling.

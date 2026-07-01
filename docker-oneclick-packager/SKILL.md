@@ -5,9 +5,17 @@ description: "Packages projects for Docker one-click and offline intranet deploy
 
 # Docker One-Click Packager
 
+## 中文速览
+
+- 用途：把项目整理成 Docker 一键部署包，优先支持内网/离线交付。
+- 适用：需要 Dockerfile、Compose、环境模板、部署脚本、离线包、部署说明时。
+- 不适用：只改业务逻辑、只验证生产风险、或只是小幅 Dockerfile 修补且不需要交付包的场景。
+
 This skill guides an Agent to transform a specified software project into a Docker-based one-click deployment package. The default target is an intranet/offline deployment bundle that can also support online deployment when Docker Hub or a registry is available.
 
 This skill is part of Zhihua's profile-driven development system. Use `zhihua-dev-profile` for long-term deployment preferences and `production-backend-verification` for production-sensitive backend validation; this skill owns packaging artifacts and operator-facing deployment bundles.
+
+This skill owns Dockerfile, Compose, env templates, deployment scripts, offline bundles, and operator handoff docs. It does not own backend behavior, production invariants, package selection, or runtime command safety; use the corresponding focused skills for those concerns.
 
 ## When To Invoke
 
@@ -346,6 +354,8 @@ If no HTTP health check is possible, use a process-level check and clearly docum
 Every time this skill creates or updates deployment artifacts, generate usage instructions in the project. Prefer updating an existing deployment guide; otherwise create a focused deployment README inside the deployment directory.
 
 In multi-Agent delivery, the Packaging Agent must also create or update `部署须知.md`. This file is written for the final deployment Agent on the target server, not only for a human operator. It must describe what the package needs, what can be changed, and what must be coordinated with other packages.
+
+Chinese is preferred for `部署须知.md` and Chinese deployment handoff docs because the target operator or final deployment Agent is likely to read Chinese. Keep filenames, commands, variables, service names, and code identifiers unchanged.
 
 Recommended documentation files:
 

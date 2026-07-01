@@ -5,9 +5,17 @@ description: "Keeps project control and delivery docs aligned with code changes.
 
 # Project Doc Sync
 
+## 中文速览
+
+- 用途：代码变更后，同步项目里的权威文档，避免代码、接口、数据、部署说明不一致。
+- 适用：行为、API、数据模型、权限、测试基线、部署、运行配置、项目状态发生变化后。
+- 不适用：没有行为影响的纯重构、格式化、文案小改，或需要从零创建文档治理体系的场景。
+
 This skill keeps code, project-control documents, acceptance criteria, and delivery manuals aligned. It is not tied to a specific repository layout. Use `zhihua-dev-profile` for long-term documentation preferences.
 
 Use it after code changes that affect product behavior, API contracts, data models, state machines, permissions, tests, deployment, runtime configuration, production readiness, or project status.
+
+This skill owns updates to existing authoritative project docs. Use `agent-dev-control` when creating a new documentation governance structure, and use the relevant domain skill to decide the technical behavior before syncing docs.
 
 ## Core Principle
 
@@ -74,6 +82,7 @@ Still mention that docs were checked and not needed.
 
 - Keep updates concise and factual.
 - Preserve the language and style of the existing document.
+- For Chinese projects or Chinese-named control docs, Chinese content is preferred unless the existing document is English.
 - Do not rewrite unrelated sections.
 - Add dates only when the document already uses dated status entries.
 - Prefer updating status bullets and tables over adding long prose.

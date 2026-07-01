@@ -5,7 +5,13 @@ description: "Evolves Zhihua's skills from real-use feedback and inferred domain
 
 # Zhihua Skill Evolution
 
-This meta-skill maintains and improves Zhihua's custom Skill system in `C:\Coding\.trae\skills`.
+## 中文速览
+
+- 用途：维护和优化志华的自定义 Skill 系统，把真实反馈沉淀成更好的触发、路由和规则。
+- 适用：Skill 触发不准、流程太重/太轻、规则需要长期记住、需要调整 profile 或拆分新 Skill 时。
+- 不适用：普通项目代码实现、一次性偏好、没有复用价值的临时要求。
+
+This meta-skill maintains and improves Zhihua's custom Skill system in the active `.trae/skills` directory.
 
 Its job is not merely to patch individual rules. It should infer Zhihua's broader development domains, needs, and preferences from real projects and real usage, then adjust the Skill system around that inferred profile.
 
@@ -86,10 +92,20 @@ Also invoke it after repeated mistakes, repeated manual corrections, or recurrin
 - Use current project examples as evidence, not boundaries.
 - Put profile/routing rules in `zhihua-dev-gatekeeper`.
 - Put package/dependency discipline in `mature-package-first-dev`.
+- Put runtime selection and command safety in `code-runtime-env`.
+- Put documentation synchronization in `project-doc-sync`.
 - Put domain-specific execution rules in focused domain Skills.
 - Do not duplicate the same rule across many Skills unless necessary for triggering.
 - Prefer checklists and decision templates over long essays.
 - Preserve existing safeguards unless they conflict with stronger user feedback.
+
+## Language Policy
+
+- Keep skill names, frontmatter descriptions, routing rules, and technical keywords in English for stable tool triggering.
+- Use Chinese where it improves recognition of Zhihua's natural instructions, especially trigger phrases, user-facing report examples, project-control document names, and Chinese project conventions.
+- Preserve the language of existing project documents when generating or syncing docs.
+- Prefer bilingual labels only when they reduce ambiguity, such as `待实现 / To Implement`.
+- Do not translate mature technical terms if translation would make routing or dependency lookup less reliable.
 
 ## Anti-Bloat Rules
 

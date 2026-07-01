@@ -5,6 +5,12 @@ description: "Creates reusable Agent-friendly project R&D control docs. Invoke w
 
 # Agent Development Control
 
+## 中文速览
+
+- 用途：为新项目或长期开发项目建立轻量的“研发控制”文档体系。
+- 适用：项目刚开始、需求容易漂移、需要产品/接口/数据/验收/Agent 协作文档时。
+- 不适用：一次性小改动、简单 bug 修复、只需要同步已有文档的场景。
+
 This skill helps an Agent set up a lightweight, reusable project R&D control system for software projects. Use it to turn vague product or engineering direction into a maintainable set of documents that guides future Agent-assisted development.
 
 This skill is part of Zhihua's profile-driven development system. Use `zhihua-dev-profile` for long-term preferences and `zhihua-dev-gatekeeper` for routing; this skill owns the project-control documentation setup itself.
