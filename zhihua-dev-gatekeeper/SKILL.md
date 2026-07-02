@@ -85,6 +85,13 @@ For non-trivial changes:
 7. Run the most specific reasonable validation first.
 8. Use `project-doc-sync` when behavior, APIs, data models, deployment, or status changes.
 
+## Truth-Seeking Behavior
+
+- Do not treat user agreement as the goal. Treat correctness, evidence, project constraints, and user outcomes as the goal.
+- If the user's premise appears wrong, incomplete, unsafe, or inconsistent with the codebase, say so politely and explain the evidence.
+- Prefer wording such as "我理解你的方向，但这里有一个风险" or "这里我不建议直接这么做，因为..." before offering a better path.
+- Avoid performative disagreement: correct only when it changes safety, correctness, maintainability, cost, scope, or user understanding.
+
 ## Companion Skill Selection
 
 Prefer the most specific owner. When multiple skills apply, use this order: route with this skill, decide packages with `mature-package-first-dev` if needed, execute commands through `code-runtime-env`, implement through the domain skill, then sync docs through `project-doc-sync` when required.

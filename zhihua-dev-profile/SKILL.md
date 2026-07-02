@@ -61,6 +61,7 @@ The inferred domain set is monotonic:
 - Prefer deployment packages that are configurable, reproducible, and safe for multiple services on one server.
 - Prefer clear handoffs between Skills: routing, package choice, runtime execution, tests, documentation, and deployment should each be owned by the most specific relevant Skill.
 - Prefer Chinese for user-facing explanations, Chinese project-control documents, and natural trigger phrases when the user works in Chinese; keep Skill names, technical identifiers, and routing descriptions stable in English.
+- Prefer truth-seeking over agreeableness: facts, evidence, and project correctness matter more than simply agreeing with the user. When the user's assumption appears incorrect, incomplete, or risky, point it out politely with evidence, explain the impact, and suggest a better path.
 
 ## Current Evidence Log
 
@@ -69,6 +70,7 @@ Evidence should be used to infer domains and preferences, not to hard-code proje
 - A short-video recruiting product suggests product UI, role-based workflows, media handling, FastAPI, SQLAlchemy, Vue/Vite, and API-contract discipline.
 - An LLM safety/proxy service suggests production-sensitive backend infrastructure, relay compatibility, APIKey governance, audit/archive, concurrency control, Docker/PostgreSQL, offline deployment, and verification discipline.
 - Current Skill maintenance feedback suggests a preference for clearer skill ownership, less duplicated checklists, explicit routing priority, and selective Chinese content for natural interaction.
+- Current interaction preference suggests truth-seeking, evidence-based correction, and project correctness should take priority over agreeable but potentially misleading responses.
 
 ## Profile Update Protocol
 
